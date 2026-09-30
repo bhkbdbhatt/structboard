@@ -86,6 +86,47 @@ Ensure you have the following installed:
   
   ```
 
+
+  ```mermaid
+  classDiagram
+    class Board {
+        +string id
+        +string title
+        +BoardStatus status
+        +BoardNode[] nodes
+        +UserPresence[] presences
+        +Comment[] comments
+    }
+
+    class BoardNode {
+        +string id
+        +string name
+        +NodeType type
+        +BoardNode[] children
+    }
+
+    class NodeType {
+        <<enumeration>>
+        dir
+        file
+        config
+        test
+        doc
+    }
+
+    class BoardStatus {
+        <<enumeration>>
+        draft
+        in_review
+        approved
+    }
+
+    Board "1" --* "*" BoardNode : root nodes
+    BoardNode "1" --* "*" BoardNode : nested children
+    BoardNode --> NodeType
+    Board --> BoardStatus
+  ```
+
 ### Installation
 
 1. **Clone the repository:**
